@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+// https://bintray.com/bintray/jcenter  -----this is the world largest Java & android library
+// https://loopj.com/android-async-http/ -----A Callback-Based Http Client Library for Android
 public class WeatherDataModel {
 
     // TODO: Declare the member variables here
