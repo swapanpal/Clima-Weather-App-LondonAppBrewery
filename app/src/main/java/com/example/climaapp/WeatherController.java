@@ -84,12 +84,26 @@ public class WeatherController extends AppCompatActivity {
         Intent myIntent = getIntent();
         String city = myIntent.getStringExtra("City");
 
-        Log.d("Clima", "Getting weather for current location");
-        getWeatherForCurrentLocation();
+        if (city != null){
+            getWeatherForNewCity(city);
+
+        }else {
+            Log.d("Clima", "Getting weather for current location");
+            getWeatherForCurrentLocation();
+        }
     }
 
 
     // TODO: Add getWeatherForNewCity(String city) here:
+    private void getWeatherForNewCity(String city){
+// 2nd API call structure:api.openweathermap.org/data/2.5/weather?q=London&appid=2ee1.....
+        RequestParams params = new RequestParams();
+        params.put("q", city);
+        params.put("appid", APP_ID);
+
+        letsDoSomeNetworking(params);
+
+    }
 
 
     // TODO: Add getWeatherForCurrentLocation() here:
@@ -105,7 +119,7 @@ public class WeatherController extends AppCompatActivity {
 
                 Log.d("Clima", "Longitude is: " + longitude);
                 Log.d("Clima", "Latitude is: " + latitude);
-
+// 1st API call structure:openweathermap.org/data/2.5/weather?lat=latitude&lon=longitude&appid=2ee1.....
                 RequestParams params = new RequestParams();
                 params.put("lat", latitude);
                 params.put("lon", longitude);
@@ -198,6 +212,11 @@ public class WeatherController extends AppCompatActivity {
 
 
 
-    // TODO: Add onPause() here:
+    // TODO: Add onPause() here: To free up device memory
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (mLocationManager != null) mLocationManager.removeUpdates(mLocationListener);
+    }
 }
