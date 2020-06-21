@@ -32,7 +32,7 @@ public class WeatherController extends AppCompatActivity {
     final int REQUEST_CODE = 123;
     final String WEATHER_URL = "http://api.openweathermap.org/data/2.5/weather";
     // App ID to use OpenWeather data
-    final String APP_ID = "e72ca729af228beabd5d20e3b7749713";
+    final String APP_ID = "2ee1f9dd2beef64cd5dca0d77a55f7ae";
     // Time between location updates (5000 milliseconds or 5 seconds)
     final long MIN_TIME = 5000;
     // Distance between location updates (1000m or 1km)
@@ -157,6 +157,7 @@ public class WeatherController extends AppCompatActivity {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 Log.d("Clima", "Success! JSON " + response.toString());
+                WeatherDataModel weatherData = WeatherDataModel.fromJson(response);
 
             }
 
